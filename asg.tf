@@ -28,7 +28,8 @@ resource "aws_launch_configuration" "cluster" {
 
   iam_instance_profile = aws_iam_instance_profile.cluster.name
 
-  user_data = data.template_file.cluster_user_data.rendered
+  # user_data = data.template_file.cluster_user_data.rendered
+  user_data = templatefile("${var.cluster_instance_user_data_template}")
 
   security_groups = concat([aws_security_group.cluster.id], var.security_groups)
 
